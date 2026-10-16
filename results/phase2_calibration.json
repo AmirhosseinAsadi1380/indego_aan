@@ -1,0 +1,516 @@
+{
+ "target": {
+  "speed": -0.009454514983680414,
+  "step_time": -0.008971110946655977,
+  "stride_length": -0.019402161371715132,
+  "step_time_cv": 0.16246853071769327
+ },
+ "fresh": {
+  "0": {
+   "speed": 0.5442331381538391,
+   "step_time": 0.4727155172423451,
+   "stride_length": 0.5145348988056334,
+   "step_time_cv": 0.013846257092536852
+  },
+  "1": {
+   "speed": 0.541059662239973,
+   "step_time": 0.4737826086966118,
+   "stride_length": 0.5126893164731242,
+   "step_time_cv": 0.018283798337597978
+  },
+  "2": {
+   "speed": 0.5536959256973134,
+   "step_time": 0.47373913043574517,
+   "stride_length": 0.5246148527313205,
+   "step_time_cv": 0.01759722893534658
+  },
+  "3": {
+   "speed": 0.5416168010132435,
+   "step_time": 0.47254310344924083,
+   "stride_length": 0.511874568062096,
+   "step_time_cv": 0.01715707945565681
+  }
+ },
+ "rows": [
+  {
+   "groups": "hip_knee_ext",
+   "level": 0.1,
+   "seed": 0,
+   "fell": false,
+   "rel_speed": 0.03997406506693424,
+   "rel_step_time": -0.003920853469513097,
+   "rel_stride_length": 0.035896479145713256,
+   "rel_step_time_cv": 0.321728107560864
+  },
+  {
+   "groups": "hip_knee_ext",
+   "level": 0.1,
+   "seed": 1,
+   "fell": false,
+   "rel_speed": 0.04698136296631472,
+   "rel_step_time": -0.005800394287571842,
+   "rel_stride_length": 0.040908458249370616,
+   "rel_step_time_cv": 0.00994279619258509
+  },
+  {
+   "groups": "hip_knee_ext",
+   "level": 0.1,
+   "seed": 2,
+   "fell": false,
+   "rel_speed": 0.021944287912575744,
+   "rel_step_time": -0.0057091498303725174,
+   "rel_stride_length": 0.01610985485458949,
+   "rel_step_time_cv": 0.08751325745323335
+  },
+  {
+   "groups": "hip_knee_ext",
+   "level": 0.1,
+   "seed": 3,
+   "fell": false,
+   "rel_speed": 0.04533639006011425,
+   "rel_step_time": -0.003374988598023654,
+   "rel_stride_length": 0.04180839166256245,
+   "rel_step_time_cv": 0.1285506984799223
+  },
+  {
+   "groups": "hip_knee_ext",
+   "level": 0.2,
+   "seed": 0,
+   "fell": false,
+   "rel_speed": 0.04104658202755962,
+   "rel_step_time": -0.0019148354153430969,
+   "rel_stride_length": 0.03905314916327152,
+   "rel_step_time_cv": 0.021901849322351508
+  },
+  {
+   "groups": "hip_knee_ext",
+   "level": 0.2,
+   "seed": 1,
+   "fell": false,
+   "rel_speed": 0.04696110446588131,
+   "rel_step_time": -0.002525212570352098,
+   "rel_stride_length": 0.04431730512421428,
+   "rel_step_time_cv": -0.20497385883988284
+  },
+  {
+   "groups": "hip_knee_ext",
+   "level": 0.2,
+   "seed": 2,
+   "fell": false,
+   "rel_speed": 0.02528252001131026,
+   "rel_step_time": -0.0038894374398639187,
+   "rel_stride_length": 0.02129474779154017,
+   "rel_step_time_cv": -0.18350057987738533
+  },
+  {
+   "groups": "hip_knee_ext",
+   "level": 0.2,
+   "seed": 3,
+   "fell": false,
+   "rel_speed": 0.04791933771582091,
+   "rel_step_time": -0.000820943172491484,
+   "rel_stride_length": 0.047059055490201285,
+   "rel_step_time_cv": -0.15687889463765747
+  },
+  {
+   "groups": "hip_knee_ext",
+   "level": 0.3,
+   "seed": 0,
+   "fell": false,
+   "rel_speed": 0.0875711295914181,
+   "rel_step_time": 0.02121327780604987,
+   "rel_stride_length": 0.11064207809728055,
+   "rel_step_time_cv": 1.132059074923721
+  },
+  {
+   "groups": "hip_knee_ext",
+   "level": 0.3,
+   "seed": 1,
+   "fell": false,
+   "rel_speed": 0.09834745217622332,
+   "rel_step_time": 0.017232152065887574,
+   "rel_stride_length": 0.11727434249330426,
+   "rel_step_time_cv": 0.6320751078468358
+  },
+  {
+   "groups": "hip_knee_ext",
+   "level": 0.3,
+   "seed": 2,
+   "fell": false,
+   "rel_speed": 0.07108724307967607,
+   "rel_step_time": 0.013401022747772773,
+   "rel_stride_length": 0.08544090758903611,
+   "rel_step_time_cv": 0.3868442580995175
+  },
+  {
+   "groups": "hip_knee_ext",
+   "level": 0.3,
+   "seed": 3,
+   "fell": false,
+   "rel_speed": 0.10172419354310125,
+   "rel_step_time": 0.01930736720484494,
+   "rel_stride_length": 0.12299558710629954,
+   "rel_step_time_cv": 0.5282498770972279
+  },
+  {
+   "groups": "hip_knee_ext",
+   "level": 0.4,
+   "seed": 0,
+   "fell": false,
+   "rel_speed": 0.06584933977809726,
+   "rel_step_time": 0.05156461118894651,
+   "rel_stride_length": 0.12080944656975023,
+   "rel_step_time_cv": 0.989162220426334
+  },
+  {
+   "groups": "hip_knee_ext",
+   "level": 0.4,
+   "seed": 1,
+   "fell": false,
+   "rel_speed": 0.06805431303350118,
+   "rel_step_time": 0.04871649411433854,
+   "rel_stride_length": 0.1200861746881916,
+   "rel_step_time_cv": 3.591588872676745
+  },
+  {
+   "groups": "hip_knee_ext",
+   "level": 0.4,
+   "seed": 2,
+   "fell": false,
+   "rel_speed": 0.03741916322822725,
+   "rel_step_time": 0.050688578587884114,
+   "rel_stride_length": 0.09000446601209822,
+   "rel_step_time_cv": 3.856959316161247
+  },
+  {
+   "groups": "hip_knee_ext",
+   "level": 0.4,
+   "seed": 3,
+   "fell": false,
+   "rel_speed": 0.06985162362509567,
+   "rel_step_time": 0.04588823563555988,
+   "rel_stride_length": 0.11894522702509058,
+   "rel_step_time_cv": 3.4041231820873783
+  },
+  {
+   "groups": "hip_knee_ext",
+   "level": 0.5,
+   "seed": 0,
+   "fell": false,
+   "rel_speed": 0.02361487005516061,
+   "rel_step_time": 0.04531445576398041,
+   "rel_stride_length": 0.06999942080362809,
+   "rel_step_time_cv": 4.291715312691495
+  },
+  {
+   "groups": "hip_knee_ext",
+   "level": 0.5,
+   "seed": 1,
+   "fell": false,
+   "rel_speed": 0.0400992532809461,
+   "rel_step_time": 0.04957995111251412,
+   "rel_stride_length": 0.09166732341077766,
+   "rel_step_time_cv": 2.9221412312280446
+  },
+  {
+   "groups": "hip_knee_ext",
+   "level": 0.5,
+   "seed": 2,
+   "fell": false,
+   "rel_speed": 0.008294235754160662,
+   "rel_step_time": 0.04900463890003581,
+   "rel_stride_length": 0.05770533068228079,
+   "rel_step_time_cv": 0.6626420333145926
+  },
+  {
+   "groups": "hip_knee_ext",
+   "level": 0.5,
+   "seed": 3,
+   "fell": false,
+   "rel_speed": 0.03602350841546409,
+   "rel_step_time": 0.059269419155514536,
+   "rel_stride_length": 0.09742801999070716,
+   "rel_step_time_cv": 4.034570436126013
+  },
+  {
+   "groups": "hip_knee_ext",
+   "level": 0.6,
+   "seed": 0,
+   "fell": false,
+   "rel_speed": 0.09871657443775028,
+   "rel_step_time": 0.08695554932379679,
+   "rel_stride_length": 0.19425607771914533,
+   "rel_step_time_cv": 0.9004347517906466
+  },
+  {
+   "groups": "hip_knee_ext",
+   "level": 0.6,
+   "seed": 1,
+   "fell": false,
+   "rel_speed": 0.10595155108716958,
+   "rel_step_time": 0.08500522040862868,
+   "rel_stride_length": 0.19996320644859922,
+   "rel_step_time_cv": 0.3053503620302902
+  },
+  {
+   "groups": "hip_knee_ext",
+   "level": 0.6,
+   "seed": 2,
+   "fell": false,
+   "rel_speed": 0.07297891905589471,
+   "rel_step_time": 0.0814207394785833,
+   "rel_stride_length": 0.16034165609035655,
+   "rel_step_time_cv": 0.5485334912537223
+  },
+  {
+   "groups": "hip_knee_ext",
+   "level": 0.6,
+   "seed": 3,
+   "fell": false,
+   "rel_speed": 0.10115217555670042,
+   "rel_step_time": 0.08904909997437271,
+   "rel_stride_length": 0.19920878572484724,
+   "rel_step_time_cv": 0.3842755728565119
+  },
+  {
+   "groups": "hip_knee_ext_plantar",
+   "level": 0.1,
+   "seed": 0,
+   "fell": false,
+   "rel_speed": 0.0650483103150763,
+   "rel_step_time": -0.0011853743047399723,
+   "rel_stride_length": 0.06378582941472222,
+   "rel_step_time_cv": 0.42455395376299965
+  },
+  {
+   "groups": "hip_knee_ext_plantar",
+   "level": 0.1,
+   "seed": 1,
+   "fell": false,
+   "rel_speed": 0.07094895156137704,
+   "rel_step_time": -0.0034349852695833016,
+   "rel_stride_length": 0.06727025768828798,
+   "rel_step_time_cv": -0.01949033719972415
+  },
+  {
+   "groups": "hip_knee_ext_plantar",
+   "level": 0.1,
+   "seed": 2,
+   "fell": false,
+   "rel_speed": 0.04629558219365193,
+   "rel_step_time": -0.005709149830373961,
+   "rel_stride_length": 0.040322123948050015,
+   "rel_step_time_cv": -0.06109029194656024
+  },
+  {
+   "groups": "hip_knee_ext_plantar",
+   "level": 0.1,
+   "seed": 3,
+   "fell": false,
+   "rel_speed": 0.0701684920150889,
+   "rel_step_time": 0.0010033749885964838,
+   "rel_stride_length": 0.07124227231356084,
+   "rel_step_time_cv": 0.2158329266816612
+  },
+  {
+   "groups": "hip_knee_ext_plantar",
+   "level": 0.2,
+   "seed": 0,
+   "fell": false,
+   "rel_speed": 0.0640085579696783,
+   "rel_step_time": -9.118263882967881e-05,
+   "rel_stride_length": 0.06391153886162515,
+   "rel_step_time_cv": -0.18856216627167954
+  },
+  {
+   "groups": "hip_knee_ext_plantar",
+   "level": 0.2,
+   "seed": 1,
+   "fell": false,
+   "rel_speed": 0.06949500622570914,
+   "rel_step_time": -0.0034349852695828575,
+   "rel_stride_length": 0.06582130663343144,
+   "rel_step_time_cv": -0.353682349028114
+  },
+  {
+   "groups": "hip_knee_ext_plantar",
+   "level": 0.2,
+   "seed": 2,
+   "fell": false,
+   "rel_speed": 0.04599212733436797,
+   "rel_step_time": -0.003120411160032699,
+   "rel_stride_length": 0.04272820182692749,
+   "rel_step_time_cv": -0.40496032902428125
+  },
+  {
+   "groups": "hip_knee_ext_plantar",
+   "level": 0.2,
+   "seed": 3,
+   "fell": false,
+   "rel_speed": 0.0692701984880233,
+   "rel_step_time": -0.0005972659022879245,
+   "rel_stride_length": 0.06863155985813374,
+   "rel_step_time_cv": -0.38969512015627694
+  },
+  {
+   "groups": "hip_knee_ext_plantar",
+   "level": 0.3,
+   "seed": 0,
+   "fell": false,
+   "rel_speed": 0.06131781625925825,
+   "rel_step_time": 0.011698572591758438,
+   "rel_stride_length": 0.07373371977569376,
+   "rel_step_time_cv": 0.5875753311647458
+  },
+  {
+   "groups": "hip_knee_ext_plantar",
+   "level": 0.3,
+   "seed": 1,
+   "fell": false,
+   "rel_speed": 0.06712816996657867,
+   "rel_step_time": 0.010253103622597015,
+   "rel_stride_length": 0.07806954567183833,
+   "rel_step_time_cv": 0.1852021172689482
+  },
+  {
+   "groups": "hip_knee_ext_plantar",
+   "level": 0.3,
+   "seed": 2,
+   "fell": false,
+   "rel_speed": 0.04038814418396952,
+   "rel_step_time": 0.014049095757017627,
+   "rel_stride_length": 0.05500465684607603,
+   "rel_step_time_cv": 0.26841282064117156
+  },
+  {
+   "groups": "hip_knee_ext_plantar",
+   "level": 0.3,
+   "seed": 3,
+   "fell": false,
+   "rel_speed": 0.07074786168911351,
+   "rel_step_time": 0.009431724892819293,
+   "rel_stride_length": 0.08084686095013982,
+   "rel_step_time_cv": 3.573945840952655
+  },
+  {
+   "groups": "hip_knee_ext_plantar",
+   "level": 0.4,
+   "seed": 0,
+   "fell": false,
+   "rel_speed": 0.07356236769228963,
+   "rel_step_time": -0.007190959046522449,
+   "rel_stride_length": 0.06584242467232682,
+   "rel_step_time_cv": 8.14949012992861
+  },
+  {
+   "groups": "hip_knee_ext_plantar",
+   "level": 0.4,
+   "seed": 1,
+   "fell": false,
+   "rel_speed": 0.06522715138465807,
+   "rel_step_time": 0.022088567040874363,
+   "rel_stride_length": 0.08875649273177788,
+   "rel_step_time_cv": 0.09189406523050492
+  },
+  {
+   "groups": "hip_knee_ext_plantar",
+   "level": 0.4,
+   "seed": 2,
+   "fell": false,
+   "rel_speed": 0.04470070622099476,
+   "rel_step_time": 0.01099389442770038,
+   "rel_stride_length": 0.056186035493732245,
+   "rel_step_time_cv": 3.414703973978166
+  },
+  {
+   "groups": "hip_knee_ext_plantar",
+   "level": 0.4,
+   "seed": 3,
+   "fell": false,
+   "rel_speed": 0.08057833080672205,
+   "rel_step_time": 0.02064950569855606,
+   "rel_stride_length": 0.10289173920645167,
+   "rel_step_time_cv": 0.4380810638228818
+  },
+  {
+   "groups": "hip_knee_ext_plantar",
+   "level": 0.5,
+   "seed": 0,
+   "fell": false,
+   "rel_speed": 0.035716648655711225,
+   "rel_step_time": -0.018204072927567316,
+   "rel_stride_length": 0.01686238725128697,
+   "rel_step_time_cv": 8.52481884229677
+  },
+  {
+   "groups": "hip_knee_ext_plantar",
+   "level": 0.5,
+   "seed": 1,
+   "fell": false,
+   "rel_speed": 0.04093392534899687,
+   "rel_step_time": -0.0029800989199639805,
+   "rel_stride_length": 0.03783183928231049,
+   "rel_step_time_cv": 4.152009669360065
+  },
+  {
+   "groups": "hip_knee_ext_plantar",
+   "level": 0.5,
+   "seed": 2,
+   "fell": false,
+   "rel_speed": 0.017301589485681168,
+   "rel_step_time": -0.0442659979854515,
+   "rel_stride_length": -0.027730280625088644,
+   "rel_step_time_cv": 9.28959092019226
+  },
+  {
+   "groups": "hip_knee_ext_plantar",
+   "level": 0.5,
+   "seed": 3,
+   "fell": false,
+   "rel_speed": 0.04021696964476762,
+   "rel_step_time": -0.000364863632216883,
+   "rel_stride_length": 0.039837432302929576,
+   "rel_step_time_cv": 5.25521852379202
+  },
+  {
+   "groups": "hip_knee_ext_plantar",
+   "level": 0.6,
+   "seed": 0,
+   "fell": false,
+   "rel_speed": 0.06093664119363984,
+   "rel_step_time": -0.2614159792637837,
+   "rel_stride_length": -0.21640914980082504,
+   "rel_step_time_cv": 27.782154462832814
+  },
+  {
+   "groups": "hip_knee_ext_plantar",
+   "level": 0.6,
+   "seed": 1,
+   "fell": false,
+   "rel_speed": 0.06508079096548647,
+   "rel_step_time": -0.2652304818307246,
+   "rel_stride_length": -0.2174111004109388,
+   "rel_step_time_cv": 21.92778009485223
+  },
+  {
+   "groups": "hip_knee_ext_plantar",
+   "level": 0.6,
+   "seed": 2,
+   "fell": false,
+   "rel_speed": 0.04390873565133968,
+   "rel_step_time": -0.25991130596031087,
+   "rel_stride_length": -0.22741494713517707,
+   "rel_step_time_cv": 21.953194068657936
+  },
+  {
+   "groups": "hip_knee_ext_plantar",
+   "level": 0.6,
+   "seed": 3,
+   "fell": false,
+   "rel_speed": 0.06796550099799403,
+   "rel_step_time": -0.24369730865376416,
+   "rel_stride_length": -0.19229481733028586,
+   "rel_step_time_cv": 23.236226507870256
+  }
+ ]
+}

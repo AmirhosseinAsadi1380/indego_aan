@@ -1,0 +1,1 @@
+{"n_steps": 4096, "batch_size": 4096, "n_epochs": 10, "learning_rate": 0.0001, "target_kl": 0.02, "log_std_init": -3.0}

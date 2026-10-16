@@ -1,0 +1,57 @@
+"""Simulated people for the AAN work: walking-parameter sets (indego_sim HumanWalkParams) per person.
+
+"tuned": the set indego_sim tunes for the subject preset (fresh walking only - falls at mild deficits).
+"robust": the T12 AIS D walker tuned (scripts/tune_robust_walk.py) to keep walking with its own deficits - drive
+down to 0.5, fatigue at 30x the sustained-contraction rates - the naive (frozen) human of the plan until the learned
+human of Phase 1 exists.
+"""
+from indego_sim.config import HumanWalkParams
+
+ROBUST_T12 = {
+    "swing_time": 0.458,
+    "min_swing_frac": 0.7094,
+    "max_swing_frac": 1.5062,
+    "theta0": 0.3744,
+    "c_d": 0.9969,
+    "c_v": 0.143,
+    "swing_knee_flex": 1.3862,
+    "kp_knee_early": 0.3555,
+    "knee_extend_at": 0.2793,
+    "knee_ext_thigh": 0.4482,
+    "swing_knee_ext": 0.1419,
+    "swing_reach_at": 0.6949,
+    "g_comp": 0.2356,
+    "swing_ankle": 0.3065,
+    "stance_knee": 0.0234,
+    "stance_ankle": 0.0524,
+    "push_off": 0.9663,
+    "pelvis_pitch": 0.0208,
+    "v_des": 0.6924,
+    "k_lean": 0.3606,
+    "max_lean": 0.15,
+    "min_step": 0.0938,
+    "init_lean": 0.1038,
+    "init_dx": 0.0402,
+    "init_max": 1.5,
+    "ds_unload": 0.3833,
+    "ds_max": 0.0645,
+    "ds_push": 1.0379,
+    "kp_hip": 2.3344,
+    "kp_knee": 2.2375,
+    "kp_ankle": 5.9043,
+    "kp_knee_st": 1.0298,
+    "kp_ankle_st": 7.8261,
+    "kp_pelvis": 7.4354,
+    "kd_ratio": 0.0779,
+    "predict": 0.0222,
+}
+
+
+def walk_params(subject: str = "sci_t12_aisD", human: str = "robust") -> HumanWalkParams:
+    if human == "robust":
+        if subject != "sci_t12_aisD":
+            raise ValueError("the robust walker is tuned for sci_t12_aisD only")
+        return HumanWalkParams(**ROBUST_T12)
+    if human == "tuned":
+        return HumanWalkParams.for_subject(subject)
+    raise ValueError(f"unknown human {human!r}")

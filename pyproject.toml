@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "indego_aan"
+version = "0.1.0"
+description = "Assist-as-needed control for the Indego exoskeleton, trained in the indego_sim human + exo simulation"
+requires-python = ">=3.10"
+dependencies = ["indego_sim", "numpy>=1.24"]
+
+[project.optional-dependencies]
+tune = ["cma>=3.3"]
+test = ["pytest>=7"]
+
+[tool.setuptools.packages.find]
+include = ["indego_aan*"]

@@ -1,0 +1,10 @@
+__pycache__/
+.pytest_cache/
+MUJOCO_LOG.TXT
+# third-party datasets: download them (see scripts), do not redistribute
+data/
+# trained-policy binaries and raw training stdout (configs, learning curves and evaluations are kept)
+results/**/model.zip
+results/**/checkpoints/
+results/**/vecnormalize.pkl
+results/**/train.log

@@ -1,0 +1,26 @@
+# Sources: what was checked and what is used
+
+The plan's sources are suggestions; this file records which were checked, what was found, and what is used (one line
+on why). Unchecked items stay in [PLAN.md](PLAN.md).
+
+## Used
+
+| source | used for | why / notes |
+|---|---|---|
+| MyoSuite `myosuite/core/muscle_conditions.py` (CumulativeFatigue, MUSCLE_FATIGUE_PARAMS), Apache-2.0 | 3CC-r fatigue model and parameters in `indego_aan/deficits.py` | the plan's suggested model; per-muscle-group F, R, r from Rakshit et al. 2021 (J Biomech 127:110695), "Default" from Frey-Law et al. 2012 with r of Looft et al. 2018; ported with attribution |
+| indego_sim (this project's simulation) | everything | the plan's base: do not rebuild |
+| DUO-GAIT (Zhou et al. 2023, Sci Data 10:543, doi 10.1038/s41597-023-02391-w; data: Zenodo 10.5281/zenodo.7415758; code: github.com/HPI-CH/fatigue-dual-task-data) | Phase 2 calibration target | 16 healthy adults, 6-min walks before/after a sit-to-stand protocol with a vest of 30 % body mass to exhaustion (Borg > 15.5, lactate up). Fatigue effect on single-task walking: stride length 1.44 -> 1.41 m (-2 %, p = 0.02), speed 1.30 -> 1.29 m/s (n.s.); from the per-subject aggregates (`scripts/duo_gait.py`, `processed.zip` only): speed -0.9 %, stride time -0.9 %, stride length -1.9 %, stride-time CV +16 % (2.0 -> 2.2 %). In the sim this protocol corresponds to starting the walk with pre-fatigued hip and knee extensors (`Fatigue3CCr.reset(MF=...)`). Open access; the Zenodo record shows no licence field (the paper is CC BY 4.0, the code MIT), so the data are kept local in `data/` (not redistributed) and only summary numbers are published. |
+| Stable-Baselines3 PPO (Raffin et al. 2021, JMLR 22:268), MIT | Phase 4 teacher training (`scripts/train_teacher.py`) | the plan's PPO; maintained, CPU-friendly, runs the simulation in parallel worker processes |
+| Gait-tracking reward instead of an AMP discriminator | Phase 4 `r_gait` (`indego_aan/env.py`) | the plan suggests an AMP-style discriminator against the fresh gait; with one deterministic simulated person a discriminator has little to learn from, so the first teacher scores the human joint angles against the person's own fresh curve at the gait phase from heel strikes (a slower stride with a normal pattern is not penalised). Deviations within 2 fresh SDs are free (teacher v2): without that band the v1 teacher learned to push a fresh person toward the mean curve. Revisit with the Phase 1 learned human or session-B data. |
+| Residual policy learning (Silver et al. 2018, arXiv 1812.06298; Johannink et al. 2019, ICRA) | Phase 4 teacher v3 (`AANEnv(base="paan")`) | the policy learns a correction on top of the personal assist-as-needed controller instead of the whole torque: it starts from a controller that already meets 'minimal assistance when fresh' and survives drive 0.4, after a policy trained from scratch kept assisting fresh people (v1, v2) |
+| CMA-ES (Hansen 2016, arXiv 1604.00772; the `cma` package) with common random numbers | Phase 4 teacher (`scripts/tune_teacher_aan.py`) | replaces PPO for the teacher for now: four PPO runs (v1-v4, ~30 h) did not beat the hand-designed personal AAN - fall outcomes are mostly decided by the episode's deficit draw, which swamps the gradient. Tuning a few parameters of a privileged, deficit-scheduled AAN with every candidate scored on the same episodes removes that noise. The plan's teacher-student scheme is kept: the student imitates this teacher. |
+| Margin of stability, extrapolated COM (Hof et al. 2005, J Biomech 38:1-8) | Phase 4 `r_stab` | the plan's term; sagittal only, with the anterior floor set by the fresh gait (the XCoM passes the front toe by up to 0.2 m in normal single support) |
+
+## Checked, not usable on the current machine
+
+| source | finding |
+|---|---|
+| KINESIS, github.com/amathislab/Kinesis (Simos et al. 2025, arXiv 2503.14637) | Code BSD-3-Clause (GitHub shows "NOASSERTION" only because third-party BSD notices for SMPLSim and PHC are appended to LICENSE.md). Pretrained policies are public, not gated, on Hugging Face (`amathislab/kinesis-models`, BSD-3-Clause-Clear, 1.3 GB): `legs`, `legs_abs` and `legs_back` embodiments, each a motion-imitation mixture of experts plus a target-reach policy. The `legs` model drives their MyoLegs model (`data/xml/legs/myolegs.xml`) at 30 Hz control / 150 Hz simulation from proprioception plus the reference motion (body positions and velocities from KIT mocap), so running it needs the SMPL neutral body model (registration at smpl.is.tue.mpg.de) and KIT from AMASS (registration at amass.is.tue.mpg.de); inference runs on CPU (PyTorch). Supports a muscle fatigue condition natively (`muscle_condition`, `init_fatigue`). Training: one A100 and 128 CPU threads, ~10 days. |
+| MuscleMimic, github.com/amathislab/musclemimic (arXiv 2603.25544), Apache-2.0 | JAX + MuJoCo Warp motion imitation with released checkpoints and retargeted data; training requires Linux with an NVIDIA GPU, evaluation also runs on CPU. A newer, permissively licensed alternative to KINESIS for Phase 1. |
+
+Current machine: Windows 11, 16 CPU cores, NVIDIA Quadro P400 (2 GB) - too small for GPU training.
