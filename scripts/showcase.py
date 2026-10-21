@@ -1,6 +1,6 @@
 """Results showcase: animated scenarios (GIF + MP4) and summary figures from the saved results.
 
-    python scripts/showcase.py [out_dir=docs/media] [aan] [estimate] [kinesis] [figures]      (default: all)
+    python scripts/showcase.py [out_dir=docs/media] [aan] [estimate] [kinesis] [figures]   (default: aan estimate)
 
 The GIFs (README-sized: trimmed, scaled, plain floor) and the figures go to out_dir; full-resolution MP4s are written
 next to them.
@@ -128,28 +128,20 @@ def _aan_sims(names, seed=0):
     return out
 
 
-def _strip(width, s, t, extra=None):
-    """Info under a panel: controller, status, drive, exo torque (and the AAN's gains)."""
+def _strip(width, s):
+    """Under a panel: the controller and whether the person is still walking."""
     from PIL import Image, ImageDraw
-    im = Image.new("RGB", (width, 96), (248, 248, 248))
+    im = Image.new("RGB", (width, STRIP), (248, 248, 248))
     dr = ImageDraw.Draw(im)
-    label = {"zero": "Zero torque (motors off)", "transparent": "Transparent mode",
-             "paan": "Personal assist-as-needed"}[s["name"]]
-    dr.text((8, 4), label, fill=(20, 20, 20), font=_font(15, True))
-    if s["fell_at"] is not None:
-        dr.text((width - 128, 4), f"FELL at {s['fell_at']:.1f} s", fill=(200, 30, 30), font=_font(15, True))
-    else:
-        dr.text((width - 80, 4), "walking", fill=(30, 140, 60), font=_font(15, True))
-    f = _font(13)
-    drive = s["defi"].drive_now
-    dr.text((8, 28), f"drive {100 * drive:3.0f} %", fill=(60, 60, 60), font=f)
-    _bar(dr, 110, 31, width - 125, 10, drive, (90, 120, 200))
-    hip, knee = np.mean(np.abs(s["tau"][[0, 2]])), np.mean(np.abs(s["tau"][[1, 3]]))
-    dr.text((8, 48), f"exo hip {hip:4.1f} N*m", fill=(60, 60, 60), font=f)
-    _bar(dr, 140, 51, width - 155, 10, hip / 20.0, (220, 120, 40))
-    dr.text((8, 68), f"exo knee {knee:4.1f} N*m", fill=(60, 60, 60), font=f)
-    _bar(dr, 140, 71, width - 155, 10, knee / 20.0, (220, 120, 40))
+    label = {"zero": "Motors off", "transparent": "Transparent mode", "paan": "Personal assist-as-needed"}[s["name"]]
+    dr.text((8, 6), label, fill=(20, 20, 20), font=_font(15, True))
+    fell = s["fell_at"] is not None
+    dr.text((width - (60 if fell else 80), 6), "fell" if fell else "walking", fill=(200, 30, 30) if fell else
+            (30, 140, 60), font=_font(15, True))
     return im
+
+
+STRIP = 30
 
 
 def scenario_aan(out, T=26.0, w=360, h=330):
@@ -175,15 +167,12 @@ def scenario_aan(out, T=26.0, w=360, h=330):
             frozen = s["fell_at"] is not None and s["sim"].d.time - s["sim"].t0 > s["fell_at"] + 1.0
             if not frozen or s["frame"] is None:
                 s["frame"] = c.render()
-            col = Image.new("RGB", (w, h + 96))
+            col = Image.new("RGB", (w, h + STRIP))
             col.paste(Image.fromarray(s["frame"]), (0, 0))
-            col.paste(_strip(w, s, t), (0, h))
+            col.paste(_strip(w, s), (0, h))
             panels.append(col)
-        phase = "fresh" if t < 10 else ("drive dropping" if t < 15 else "drive at 40 %")
-        top = _title(3 * w, f"Volitional drive drops 100 % -> 40 % (10-15 s)   t = {t:4.1f} s   [{phase}]",
-                     "Simulated person (incomplete SCI, T12 AIS D) walking on their own in the Indego; same person, "
-                     "same seed, three exo controllers")
-        frame = Image.new("RGB", (3 * w, top.height + h + 96), (255, 255, 255))
+        top = _title(3 * w, f"Voluntary drive {100 * sims[0]['defi'].drive_now:3.0f} %      t = {t:4.1f} s")
+        frame = Image.new("RGB", (3 * w, top.height + h + STRIP), (255, 255, 255))
         frame.paste(top, (0, 0))
         for i, p in enumerate(panels):
             frame.paste(p, (i * w, top.height))
@@ -205,8 +194,8 @@ def scenario_estimate(out, T=30.0, w=440, h=380):
     dt = sim.ctrl_dt
     every = int(round(1.0 / FPS / dt))
     tau_ema, ph_prev, last_wrap, stride = 0.0, None, None, np.nan
-    hist = {k: [] for k in ("t", "cap", "est", "k_hip", "k_knee", "hip", "knee")}
-    fig, axs = plt.subplots(3, 1, figsize=(5.4, h / 100 + 0.6), dpi=100, sharex=True)
+    hist = {k: [] for k in ("t", "cap", "est", "tau")}
+    fig, axs = plt.subplots(2, 1, figsize=(5.4, h / 100), dpi=100, sharex=True)
     frames = []
     for k in range(int(round(T / dt))):
         s["tau"] = np.asarray(c(s["obs"]), float)
@@ -224,38 +213,26 @@ def scenario_estimate(out, T=30.0, w=440, h=380):
             continue
         x = np.array([1.0, np.mean(c.k[[0, 2]]), np.mean(c.k[[1, 3]]), tau_ema, stride])
         est = float(coef @ x) if np.isfinite(stride) and t > 3 else np.nan
-        for key, v in (("t", t), ("cap", s["defi"].drive_now), ("est", est), ("k_hip", np.mean(c.k[[0, 2]])),
-                       ("k_knee", np.mean(c.k[[1, 3]])), ("hip", np.mean(np.abs(s["tau"][[0, 2]]))),
-                       ("knee", np.mean(np.abs(s["tau"][[1, 3]])))):
+        for key, v in (("t", t), ("cap", s["defi"].drive_now), ("est", est), ("tau", tau_ema)):
             hist[key].append(v)
         for ax in axs:
             ax.cla()
             ax.set_xlim(0, T)
             ax.grid(alpha=0.3)
         H = {kk: np.array(v) for kk, v in hist.items()}
-        axs[0].plot(H["t"], 100 * H["cap"], color="k", lw=2, label="true capacity (drive)")
-        axs[0].plot(H["t"], 100 * np.clip(H["est"], 0, 1.2), color="tab:red", lw=1.8,
-                    label="estimate from exo signals")
+        axs[0].plot(H["t"], 100 * H["cap"], color="k", lw=2, label="capacity")
+        axs[0].plot(H["t"], 100 * np.clip(H["est"], 0, 1.2), color="tab:red", lw=1.8, label="estimated by the exo")
         axs[0].set_ylim(0, 115)
-        axs[0].set_ylabel("%")
-        axs[0].legend(loc="lower left", fontsize=8)
-        axs[1].plot(H["t"], H["k_hip"], color="tab:blue", label="hip gain")
-        axs[1].plot(H["t"], H["k_knee"], color="tab:green", label="knee gain")
-        axs[1].set_ylabel("AAN gain")
-        axs[1].set_ylim(0, 1.05)
-        axs[1].legend(loc="upper left", fontsize=8)
-        axs[2].plot(H["t"], H["hip"], color="tab:blue", label="hip")
-        axs[2].plot(H["t"], H["knee"], color="tab:green", label="knee")
-        axs[2].set_ylabel("|exo torque| N*m")
-        axs[2].set_xlabel("time [s]")
-        axs[2].set_ylim(0, max(10.0, 1.1 * max(H["hip"].max(), H["knee"].max())))
-        axs[2].legend(loc="upper left", fontsize=8)
+        axs[0].set_ylabel("capacity [%]")
+        axs[0].legend(loc="lower left", fontsize=9, frameon=False)
+        axs[1].plot(H["t"], H["tau"], color="tab:orange", lw=1.8)
+        axs[1].set_ylabel("exo torque [N*m]")
+        axs[1].set_xlabel("time [s]")
+        axs[1].set_ylim(0, max(4.0, 1.15 * H["tau"].max()))
         fig.tight_layout()
         fig.canvas.draw()
         plot = Image.fromarray(np.asarray(fig.canvas.buffer_rgba())[..., :3])
-        top = _title(w + plot.width, f"Personal AAN: the assistance grows only as the person weakens   t = {t:4.1f} s",
-                     "Drive drops 100 % -> 40 % (10-15 s). Red: capacity estimated from exo signals only "
-                     "(linear fit in simulation, R^2 0.85)")
+        top = _title(w + plot.width, f"Personal assist-as-needed      t = {t:4.1f} s")
         frame = Image.new("RGB", (w + plot.width, top.height + max(h, plot.height)), (255, 255, 255))
         frame.paste(top, (0, 0))
         frame.paste(Image.fromarray(cam.render()), (0, top.height))
@@ -487,7 +464,7 @@ def figures(out):
 if __name__ == "__main__":
     args = sys.argv[1:]
     out = os.path.abspath(args.pop(0)) if args and args[0] not in ("aan", "estimate", "kinesis", "figures") else         os.path.join(ROOT, "docs", "media")
-    what = args or ["figures", "aan", "estimate", "kinesis"]
+    what = args or ["aan", "estimate"]
     os.makedirs(out, exist_ok=True)
     from indego_aan.resources import single_thread_env
     single_thread_env()
