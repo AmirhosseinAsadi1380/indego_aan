@@ -1,10 +1,20 @@
 __pycache__/
+*.egg-info/
 .pytest_cache/
 MUJOCO_LOG.TXT
-# third-party datasets: download them (see scripts), do not redistribute
+# working notes kept next to the code, not part of the package
+internal/
+# third-party datasets: download them (see the README), do not redistribute
 data/
-# trained-policy binaries and raw training stdout (configs, learning curves and evaluations are kept)
+# trained-policy binaries, raw training stdout and run logs (configs, learning curves and evaluations are kept)
 results/**/model.zip
 results/**/checkpoints/
 results/**/vecnormalize.pkl
 results/**/train.log
+results/**/*.log
+# simulated trials (regenerate with scripts/waterloo_indego.py --simulate)
+results/waterloo/sim_*.npz
+# recorded KINESIS walks (regenerate with scripts/kinesis_walk.py --record)
+results/kinesis_long/
+# full-resolution videos made with the GIFs (scripts/showcase.py)
+docs/media/*.mp4

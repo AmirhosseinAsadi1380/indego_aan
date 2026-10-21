@@ -4,14 +4,25 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "indego_aan"
-version = "0.1.0"
-description = "Assist-as-needed control for the Indego exoskeleton, trained in the indego_sim human + exo simulation"
+version = "0.2.0"
+description = "Personalised assist-as-needed control for the Indego exoskeleton, developed in the indego_sim human + exo simulation"
+readme = "README.md"
 requires-python = ">=3.10"
-dependencies = ["indego_sim", "numpy>=1.24"]
+dependencies = [
+    "indego_sim",          # install it first, from github.com/AmirhosseinAsadi1380/indego_sim (see the README)
+    "numpy>=1.24",
+    "scipy>=1.10",
+]
 
 [project.optional-dependencies]
+rl = ["gymnasium>=0.29", "torch>=2.2", "stable-baselines3>=2.3"]
 tune = ["cma>=3.3"]
+viz = ["matplotlib>=3.7", "imageio[ffmpeg]>=2.30", "pillow>=10"]
 test = ["pytest>=7"]
+all = ["indego_aan[rl,tune,viz,test]"]
+
+[project.urls]
+Simulation = "https://github.com/AmirhosseinAsadi1380/indego_sim"
 
 [tool.setuptools.packages.find]
 include = ["indego_aan*"]

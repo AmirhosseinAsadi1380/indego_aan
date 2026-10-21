@@ -1,0 +1,173 @@
+{
+ "source": "Evaluation of the KINESIS learned human (pretrained, and fine-tuned with the exo in rounds 1-2). Pelvis / hip ranges: scripts/kinesis/gait_check.py (KINESIS's own simulation) and scripts/kinesis_walk.py (indego_sim), 0.83 m/s reference, round-2 policy unless noted; degrees, 2nd-98th percentile ranges after 3 s. Deficits: KINESIS's simulation, no exo, 40 s, drive dropping at 5 s over 1 s; seconds walked (40 = whole run). Long references: 18 references at 0.5-1.0 m/s, 65 s each, KINESIS's evaluation (mean distance > 0.5 m ends a run).",
+ "pelvis_hip_ranges": {
+  "reference (KIT motion)": {
+   "pelvis_yaw": 13.4,
+   "pelvis_pitch": 3.2,
+   "pelvis_roll": 5.6,
+   "hip_rotation": null
+  },
+  "pretrained, KINESIS sim": {
+   "pelvis_yaw": 80.4,
+   "pelvis_pitch": null,
+   "pelvis_roll": null,
+   "hip_rotation": 81.0
+  },
+  "round 2, KINESIS sim": {
+   "pelvis_yaw": 76.7,
+   "pelvis_pitch": 14.9,
+   "pelvis_roll": 16.4,
+   "hip_rotation": 81.5
+  },
+  "round 2, indego_sim, no exo": {
+   "pelvis_yaw": 68.6,
+   "pelvis_pitch": 17.4,
+   "pelvis_roll": 10.7,
+   "hip_rotation": 76.6
+  },
+  "round 2, indego_sim, exo (frontal springs relaxed)": {
+   "pelvis_yaw": 52.8,
+   "pelvis_pitch": 24.0,
+   "pelvis_roll": 11.7,
+   "hip_rotation": 41.6
+  },
+  "round 2, indego_sim, exo (springs 600/150) - falls at 5 s": {
+   "pelvis_yaw": 25.7,
+   "pelvis_pitch": null,
+   "pelvis_roll": null,
+   "hip_rotation": 25.7
+  }
+ },
+ "people_typical": {
+  "pelvis_yaw": [
+   10,
+   15
+  ],
+  "pelvis_pitch_no_exo": [
+   3,
+   5
+  ],
+  "pelvis_pitch_in_indego": [
+   11,
+   13
+  ],
+  "pelvis_roll": [
+   5,
+   8
+  ],
+  "hip_rotation": [
+   10,
+   15
+  ]
+ },
+ "deficit_seconds_walked_no_exo": {
+  "conditions": [
+   "drive 0.9",
+   "drive 0.8",
+   "drive 0.7",
+   "drive 0.6",
+   "drive 0.5",
+   "fatigue 0.1",
+   "fatigue 0.2",
+   "fatigue 0.3",
+   "fatigue 0.5"
+  ],
+  "pretrained": [
+   40,
+   19.2,
+   26.5,
+   10.2,
+   8.1,
+   40,
+   6.8,
+   21.1,
+   7.2
+  ],
+  "round 2": [
+   40,
+   40,
+   31.9,
+   12.5,
+   7.2,
+   40,
+   40,
+   40,
+   6.5
+  ]
+ },
+ "folded_exo_ablation_seconds_walked": {
+  "note": "round 2, KINESIS sim, 0.83 m/s, 40 s, no deficit; AFO = ankle spring 150 N*m/rad",
+  "mass + friction": 40,
+  "AFO about 0 deg": 8.3,
+  "AFO about 5 deg (fixed)": 40,
+  "AFO 5 deg + mass + friction": 14.4,
+  "AFO 5 deg + half mass + friction": 35.1,
+  "full Indego springs 600/150/150": 5.1
+ },
+ "long_references_round2": {
+  "conditions": [
+   "no exo",
+   "exo relaxed",
+   "exo relaxed, half mass",
+   "drive 0.8",
+   "fatigue 0.3",
+   "exo + drive 0.9"
+  ],
+  "walked_whole_65s_of_18": [
+   14,
+   12,
+   11,
+   12,
+   6,
+   5
+  ],
+  "mean_percent_walked": [
+   85,
+   75,
+   76,
+   78,
+   46,
+   47
+  ]
+ },
+ "kit_test_success_percent": {
+  "conditions": [
+   "no exo",
+   "abduction 150",
+   "abduction 300",
+   "abduction 600",
+   "full Indego 600/150/150"
+  ],
+  "pretrained": [
+   88.9,
+   null,
+   57.4,
+   43.5,
+   null
+  ],
+  "round 1": [
+   89.8,
+   89.8,
+   78.7,
+   63.9,
+   10.2
+  ],
+  "round 2": [
+   88.0,
+   83.3,
+   77.8,
+   59.3,
+   27.8
+  ]
+ },
+ "indego_sim_60s_walks_round2": {
+  "note": "62-s long references, 4 seeds, frontal springs relaxed; walked the whole 62 s",
+  "0.51 m/s zero torque": "3/4",
+  "0.63 m/s transparent": "4/4",
+  "0.63 m/s zero torque": "3/4",
+  "0.83 m/s transparent": "3/4",
+  "0.83 m/s zero torque": "4/4",
+  "1.05 m/s transparent": "4/4",
+  "1.28 m/s transparent": "0/4"
+ }
+}

@@ -158,3 +158,21 @@ class Deficits:
     def detach(self):
         self.hc.step = self._orig
         self.hc.mm.static_optimisation = self._orig_so
+
+
+class CommandDeficits:
+    """Deficits for a person whose controller outputs the muscle commands itself (the learned KINESIS human,
+    indego_aan.kinesis_human): its commands are scaled by the drive and capped by fatigue; it does not re-plan, but
+    its policy reacts to the resulting tracking errors through feedback (the "command" mode of Deficits)."""
+
+    def __init__(self, sim, drive: Optional[DriveProcess] = None, fatigue: Optional[Fatigue3CCr] = None):
+        self.sim, self.drive, self.fatigue = sim, drive, fatigue
+        self.act_adr = sim.m.actuator_actadr[sim.human.mm.ids]
+        self.drive_now = 1.0
+
+    def apply(self, d, u: np.ndarray, dt: float) -> np.ndarray:
+        self.drive_now = self.drive.value(d.time - self.sim.t0, dt) if self.drive else 1.0
+        u = np.clip(self.drive_now * u, 0.0, 1.0)
+        if self.fatigue is not None:
+            u = self.fatigue.limit(u, d.act[self.act_adr], dt)
+        return u

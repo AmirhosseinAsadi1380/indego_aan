@@ -1,10 +1,10 @@
-"""The plan's three success criteria, computed from recorded rollouts (indego_aan.rollout).
+"""The project's three success criteria, computed from recorded rollouts (indego_aan.rollout).
 
 * Gait stays normal: joint-angle curves over the gait cycle (hip, knee, ankle, both sides, time-normalised between
   right heel strikes) compared with the person's fresh baseline - the deviation of the mean curve divided by the
   baseline's cycle-to-cycle variability (<= 1: within fresh variability) - plus speed and step-time variability.
   `gait_deviation` (the pass/fail number) is the worst of the joints the Indego drives (hip and knee, both sides);
-  the ankles, which it cannot drive, are reported as `gait_deviation_ankle` (docs/PLAN.md, note under the criteria).
+  the ankles, which it cannot drive, are reported as `gait_deviation_ankle`.
 * Assistance is minimal: mean squared exo torque and exo positive work per second (hip + knee).
 * The human keeps working: the human's share of hip + knee positive work, human / (human + exo).
 """
@@ -18,15 +18,29 @@ import numpy as np
 N_PHASE = 101
 
 
-def heel_strikes(rec, side: int, frac: float = 0.05, min_gap: float = 0.3) -> np.ndarray:
-    """Indices where the vertical load on foot `side` (0 = left, 1 = right) rises above `frac` of body weight."""
+def heel_strikes(rec, side: int, frac: float = 0.05, min_gap: float = 0.3, min_stance: float = 0.15) -> np.ndarray:
+    """Indices where the vertical load on foot `side` (0 = left, 1 = right) rises above `frac` of body weight and stays
+    there for most of the next `min_stance` s (a foot brushing the ground in swing is not a heel strike)."""
     on = rec["load"][:, side] > frac * rec["body_weight"]
     idx = np.flatnonzero(on[1:] & ~on[:-1]) + 1
+    w = max(1, int(round(min_stance / rec["dt"])))
     keep, last = [], -np.inf
     for i in idx:
-        if (i - last) * rec["dt"] >= min_gap:
+        if (i - last) * rec["dt"] >= min_gap and on[i:i + w].mean() >= 0.8:
             keep.append(i)
             last = i
+    return _drop_early(np.asarray(keep, int))
+
+
+def _drop_early(hs: np.ndarray, frac: float = 0.6) -> np.ndarray:
+    """Drop strikes that come sooner than frac x the median stride after the previous kept one (re-contacts)."""
+    if len(hs) < 4:
+        return hs
+    med = np.percentile(np.diff(hs), 75)           # re-contacts shorten many intervals: not the median
+    keep = [hs[0]]
+    for i in hs[1:]:
+        if i - keep[-1] >= frac * med:
+            keep.append(i)
     return np.asarray(keep, int)
 
 

@@ -2,7 +2,7 @@
 
 "tuned": the set indego_sim tunes for the subject preset (fresh walking only - falls at mild deficits).
 "robust": the T12 AIS D walker tuned (scripts/tune_robust_walk.py) to keep walking with its own deficits - drive
-down to 0.5, fatigue at 30x the sustained-contraction rates - the naive (frozen) human of the plan until the learned
+down to 0.5, fatigue at 30x the sustained-contraction rates - the naive (frozen) human until the learned
 human of Phase 1 exists.
 """
 from indego_sim.config import HumanWalkParams

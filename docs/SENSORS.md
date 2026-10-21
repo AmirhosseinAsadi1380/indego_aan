@@ -1,7 +1,7 @@
 # Observation audit: what the deployable policy may use
 
-The plan requires the student policy to use exactly the sensors the real Indego provides. This is what indego_sim's
-`ExoSensors` (`indego_sim/exo/sensors.py`) gives a controller, checked against the plan's student observation list.
+A deployable controller may use only the sensors the real Indego provides. This is what indego_sim's `ExoSensors`
+(`indego_sim/exo/sensors.py`) gives a controller, checked against the list the deployable (student) policy may use.
 
 ## Rate and latency
 
@@ -14,7 +14,7 @@ The plan requires the student policy to use exactly the sensors the real Indego 
 
 ## Signals
 
-| signal (obs key) | size | on the stock Indego | in the plan's student list |
+| signal (obs key) | size | on the stock Indego | allowed for the deployable policy |
 |---|---|---|---|
 | joint angle `q` (hip_l, knee_l, hip_r, knee_r), 14-bit encoders | 4 | yes | joint encoders |
 | joint velocity `qd`, filtered encoder difference (firmware) | 4 | yes | firmware velocity |
@@ -27,7 +27,7 @@ The plan requires the student policy to use exactly the sensors the real Indego 
 
 `ExoSensors.flatten` gives the 34 stock values (q, qd, tau_est, the three IMUs, hip_quat) + 10 with the trunk IMU;
 `current` is in the observation dict (tau_est is derived from it). Noise, bias, quantisation and latency are applied
-in the sensor model and are randomised in training (plan: Randomization).
+in the sensor model and are randomised in training.
 
 ## Privileged (teacher-only) state
 

@@ -1,5 +1,5 @@
 """Tune the person's own walking (indego_sim HumanWalkParams) to cope with their own deficits - the naive human
-population of the plan, until the learned human of Phase 1 exists.
+population, until the learned human of Phase 1 exists.
 
 Each candidate walks with the zero-torque exo in several deficit variants (fresh; volitional drive ramping down after
 5 s to a lower level; fatigue accumulating from the start), deficits in "capacity" mode (the person shares the load

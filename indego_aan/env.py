@@ -16,7 +16,7 @@ muscle fatigue degrade within the episode (indego_aan.deficits); the policy comm
             assistance costs up to `torque_fresh_scale` times more while the person can still do the work (the
             criterion: exo torque rises only when the human's contribution falls)
     r_gait  exp(-mean((max(|q - q_fresh(phase)| - gait_band x sd_fresh(phase), 0) / gait_sigma)^2) / 2) over hip,
-            knee, ankle of both legs - a tracking stand-in for the plan's AMP discriminator (the reference is the
+            knee, ankle of both legs - a tracking stand-in for an AMP-style discriminator (the reference is the
             person's own fresh gait; phase from heel strikes, so a slower stride with a normal pattern is not
             penalised). Deviations within `gait_band` fresh SDs cost nothing: the criterion is "within the fresh
             variability", and rewarding tighter tracking than that pays the policy to push a fresh person.

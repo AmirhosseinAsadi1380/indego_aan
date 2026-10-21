@@ -96,6 +96,8 @@ if __name__ == "__main__":
         errs.append(float(np.sqrt(np.mean((pred - y) ** 2))))
         r2s.append(float(1 - np.sum((pred - y) ** 2) / np.sum((y - y.mean()) ** 2)))
     summary.update(loso_rmse=errs, loso_r2=r2s)
+    w_all, *_ = np.linalg.lstsq(design(allr), np.array([r["cap"] for r in allr]), rcond=None)
+    summary["coef_all"] = w_all.tolist()              # [intercept, *FEATURES]: for other people (transfer tests)
     print(f"linear capacity estimate, leave-one-seed-out: RMSE {np.mean(errs):.3f} (capacity units), R^2 {np.mean(r2s):.2f}")
     # leave-one-deficit-out: fitted without a whole deficit type, tested on it (does it read the gait, or the condition?)
     loco = {}

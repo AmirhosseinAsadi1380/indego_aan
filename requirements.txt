@@ -1,7 +1,11 @@
-# indego_sim (pip install -e ../indego_sim) brings mujoco, numpy, scipy, pyyaml
+# indego_sim and its MyoLeg model first (see the README), then:
 numpy>=1.24
-cma>=3.3               # tuning scripts
-pytest>=7              # tests
-gymnasium>=1.0         # teacher environment
-torch>=2.2             # PPO teacher (CPU build is enough: pip install torch --index-url https://download.pytorch.org/whl/cpu)
-stable-baselines3>=2.3 # PPO
+scipy>=1.10
+cma>=3.3                # CMA-ES tuning scripts
+matplotlib>=3.7         # figures
+imageio[ffmpeg]>=2.30   # animations
+pillow>=10              # animations
+gymnasium>=0.29         # teacher environment
+torch>=2.2              # PPO teacher (the CPU build is enough: pip install torch --index-url https://download.pytorch.org/whl/cpu)
+stable-baselines3>=2.3  # PPO
+pytest>=7               # tests
